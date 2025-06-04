@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+
+  application:
+    name: app-mvc-gestao
+
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connect-timeout: 5000
+            read-timeout: 10000
+
+
+
+api:
+  central:
+    url: http://localhost:8080

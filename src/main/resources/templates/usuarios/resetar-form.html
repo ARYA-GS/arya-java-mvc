@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resetar Senha</title>
+</head>
+<body>
+<h1>Resetar Senha</h1>
+
+<form th:action="@{|/recuperar-senha/${token}|}" method="post" th:object="${request}">
+    <label>Nova Senha:</label>
+    <input type="password" th:field="*{novaSenha}" required /><br/>
+
+    <label>Confirmar Senha:</label>
+    <input type="password" th:field="*{confirmarSenha}" required /><br/>
+
+    <button type="submit">Atualizar Senha</button>
+</form>
+
+<div th:if="${erro}" style="color:red;">
+    <p th:text="${erro}"></p>
+</div>
+
+</body>
+</html>
