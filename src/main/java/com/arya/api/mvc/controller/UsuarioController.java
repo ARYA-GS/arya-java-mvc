@@ -6,6 +6,7 @@ import com.arya.api.mvc.dto.request.UsuarioTrocarSenhaRequest;
 import com.arya.api.mvc.dto.response.UsuarioResponse;
 import com.arya.api.mvc.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,5 +39,19 @@ public class UsuarioController {
     public String telaTrocarSenha(Model model) {
         model.addAttribute("senhaRequest", new UsuarioTrocarSenhaRequest());
         return "usuarios/trocar-senha";
+    }
+
+    @PostMapping("/trocar-senha")
+    public String trocarSenha(@ModelAttribute("senhaRequest") UsuarioTrocarSenhaRequest request,
+                              HttpSession session,
+                              Model model) {
+        String userId = (String) session.getAttribute("userId");
+        if (userId == null) {
+            model.addAttribute("erro", "Usuário não autenticado");
+            return "usuarios/trocar-senha";
+        }
+
+        usuarioService.trocarSenha(userId, request);
+        return "redirect:/home";
     }
 }
