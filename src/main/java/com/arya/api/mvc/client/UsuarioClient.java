@@ -7,9 +7,10 @@ import com.arya.api.mvc.dto.request.UsuarioTrocarSenhaRequest;
 import com.arya.api.mvc.dto.response.UsuarioResponse;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import com.arya.api.mvc.config.FeignConfig;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "usuarios", url = "${api.central.url}/usuarios")
+@FeignClient(name = "usuarios", url = "${api.central.url}/usuarios", configuration = FeignConfig.class)
 public interface UsuarioClient {
 
     @PostMapping()

@@ -2,27 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
+    <link rel="stylesheet" th:href="@{/login.css}">
 </head>
 <body>
-<h1>Login</h1>
+<div class="drone-animation-bg">
+    <div class="drone drone-1"></div>
+    <div class="drone drone-2"></div>
+    <div class="drone drone-3"></div>
+</div>
 
-<form th:action="@{/login}" method="post" th:object="${loginRequest}">
-    <label>Email:</label>
-    <input type="email" th:field="*{email}" required /><br/>
+<div class="login-container">
+    <img th:src="@{/imagem/arya-branco.png}" alt="Arya Logo" class="arya-logo">
 
-    <label>Senha:</label>
-    <input type="password" th:field="*{senha}" required /><br/>
+    <h1>Login</h1>
 
-    <button type="submit">Entrar</button>
-</form>
+    <form th:action="@{/login}" method="post" th:object="${loginRequest}">
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" required /><br/>
 
-<p th:if="${erro}" th:text="${erro}" style="color:red;"></p>
+        <label>Senha:</label>
+        <input type="password" th:field="*{senha}" required /><br/>
 
-<hr/>
+        <button type="submit">Entrar</button>
+    </form>
 
-<p>Não tem conta? <a th:href="@{/usuarios/cadastro}">Cadastre-se aqui</a></p>
-<p>Esqueceu a senha? <a th:href="@{/recuperar-senha}">Recuperar senha</a></p>
+    <p th:if="${erro}" th:text="${erro}" class="error-message"></p>
+
+    <hr/>
+
+    <p>Não tem conta? <a th:href="@{/usuarios/cadastro}">Cadastre-se aqui</a></p>
+    <p>Esqueceu a senha? <a th:href="@{/recuperar-senha}">Recuperar senha</a></p>
+</div>
 
 </body>
 </html>
-

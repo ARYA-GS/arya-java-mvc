@@ -1,11 +1,241 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Home</title></head>
+<head>
+    <title>Home - Arya Dashboard</title>
+    <!-- CSS for the home page -->
+    <link rel="stylesheet" th:href="@{/home.css}">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Chart.js JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <body>
-<h1>Bem-vindo à área do usuário</h1>
-<ul>
-    <li><a th:href="@{/usuarios/trocar-senha}">Trocar senha</a></li>
-    <li><a th:href="@{/logout}">Sair</a></li>
-</ul>
+
+<div class="dashboard-container">
+
+    <div class="nav-panel">
+        <div class="nav-panel-main">
+            <img th:src="@{/imagem/arya-branco.png}" alt="Arya Logo" class="arya-logo">
+            <h1>Dashboard</h1>
+            <p class="welcome-text">Bem-vindo à Central de Operações Arya.</p>
+
+            <ul class="nav-menu">
+                <li><a th:href="@{/usuarios/trocar-senha}">Trocar Senha</a></li>
+                <li><a th:href="@{/hubs}">Gerenciar Hubs</a></li>
+                <li><a th:href="@{/drones}">Gerenciar Drones</a></li>
+                <li class="logout-item"><a th:href="@{/logout}">Sair</a></li>
+            </ul>
+        </div>
+
+        <div class="chat-ia-panel">
+            <div class="chat-header">
+                <h3>Arya AI Assistant</h3>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ia">
+                    <p>Olá! Como posso ajudar a analisar os dados de hoje?</p>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <form id="chatForm">
+                    <input type="text" id="chatInput" placeholder="Pergunte algo..." autocomplete="off">
+                    <button type="submit" title="Enviar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content-panel">
+        <div class="map-panel">
+            <h2>Mapa de Riscos em Tempo Real</h2>
+            <div id="mapaRiscos"></div>
+        </div>
+
+        <div class="charts-grid-panel">
+            <div class="chart-panel">
+                <h2>Resumo de Ocorrências</h2>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="graficoOcorrencias"></canvas>
+                </div>
+            </div>
+            <div class="chart-panel">
+                <h2>Drones por Modelo</h2>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="graficoDrones"></canvas>
+                </div>
+            </div>
+            <div class="chart-panel">
+                <h2>Hubs por Cidade</h2>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="graficoHubs"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    // --- Dados do Servidor ---
+    const ocorrencias = /*[[${ocorrencias}]]*/ [] || [];
+    const hubs = /*[[${hubs}]]*/ [] || [];
+    const drones = /*[[${drones}]]*/ [] || [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const tipoCor = {
+            "Enchente": "#3498db", "Deslizamento": "#e74c3c", "Incêndio": "#f39c12", "Outro": "#95a5a6"
+        };
+        const chartColors = ['#00c292', '#3498db', '#f39c12', '#e74c3c', '#9b59b6', '#34495e'];
+
+        const mapa = L.map('mapaRiscos', { zoomControl: false }).setView([-14.235, -51.9253], 4);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap &copy; CARTO'
+        }).addTo(mapa);
+        ocorrencias.forEach(o => {
+            let tipo = "Outro";
+            const tipoOriginal = o.tipoOcorrencia?.toLowerCase() || "";
+            if (tipoOriginal.includes("enchente")) tipo = "Enchente";
+            else if (tipoOriginal.includes("desliz")) tipo = "Deslizamento";
+            else if (tipoOriginal.includes("incêndio") || tipoOriginal.includes("incendio")) tipo = "Incêndio";
+            const cor = tipoCor[tipo];
+            if (o.latitudeCentralArea && o.longitudeCentralArea) {
+                const riskIcon = L.divIcon({
+                    className: 'risk-marker',
+                    html: `<div class="pulsing-dot" style="background-color: ${cor};"></div>`,
+                    iconSize: [12, 12], iconAnchor: [6, 6]
+                });
+                L.marker([o.latitudeCentralArea, o.longitudeCentralArea], { icon: riskIcon })
+                    .addTo(mapa).bindPopup(`<strong>${o.tipoOcorrencia}</strong><br/>${o.endereco?.cidade || ''} - ${o.endereco?.estado || ''}`, { className: 'custom-popup' });
+            }
+        });
+        setTimeout(() => mapa.invalidateSize(), 100);
+
+        const chartDefaultOptions = (extraPlugins = {}) => ({
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#1a1e2e', titleColor: '#e0e0e0', bodyColor: '#c0c0c0',
+                    borderColor: '#4a5072', borderWidth: 1
+                },
+                ...extraPlugins
+            }
+        });
+
+        const chartScales = {
+            x: { beginAtZero: true, ticks: { color: '#c0c0c0' }, grid: { color: '#4a5072' } },
+            y: { ticks: { color: '#e0e0e0' }, grid: { display: false } }
+        };
+
+        const tiposOcorrencia = {};
+        ocorrencias.forEach(o => {
+            let tipo = "Outro";
+            const t = o.tipoOcorrencia?.toLowerCase() || "";
+            if (t.includes("enchente")) tipo = "Enchente";
+            else if (t.includes("desliz")) tipo = "Deslizamento";
+            else if (t.includes("incêndio") || t.includes("incendio")) tipo = "Incêndio";
+            tiposOcorrencia[tipo] = (tiposOcorrencia[tipo] || 0) + 1;
+        });
+        new Chart(document.getElementById('graficoOcorrencias'), {
+            type: 'bar',
+            data: { labels: Object.keys(tiposOcorrencia), datasets: [{
+                    label: 'Quantidade', data: Object.values(tiposOcorrencia),
+                    backgroundColor: Object.keys(tiposOcorrencia).map(label => tipoCor[label]),
+                    borderRadius: 4 }]
+            },
+            options: { ...chartDefaultOptions(), indexAxis: 'y', scales: chartScales }
+        });
+
+        const modelosDrone = {};
+        drones.forEach(d => {
+            modelosDrone[d.modelo || "Desconhecido"] = (modelosDrone[d.modelo || "Desconhecido"] || 0) + 1;
+        });
+        new Chart(document.getElementById('graficoDrones'), {
+            type: 'doughnut',
+            data: { labels: Object.keys(modelosDrone), datasets: [{
+                    label: 'Quantidade', data: Object.values(modelosDrone),
+                    backgroundColor: chartColors, borderColor: '#252a3a', borderWidth: 2 }]
+            },
+            options: chartDefaultOptions({ legend: { display: true, position: 'bottom', labels: { color: '#e0e0e0' } } })
+        });
+
+        const hubsPorCidade = {};
+        hubs.forEach(h => {
+            hubsPorCidade[h.endereco?.cidade || "Desconhecida"] = (hubsPorCidade[h.endereco?.cidade || "Desconhecida"] || 0) + 1;
+        });
+        new Chart(document.getElementById('graficoHubs'), {
+            type: 'pie',
+            data: { labels: Object.keys(hubsPorCidade), datasets: [{
+                    label: 'Hubs', data: Object.values(hubsPorCidade),
+                    backgroundColor: chartColors.slice().reverse(), borderColor: '#252a3a', borderWidth: 2 }]
+            },
+            options: chartDefaultOptions({ legend: { display: true, position: 'bottom', labels: { color: '#e0e0e0' } } })
+        });
+
+        const chatForm = document.getElementById('chatForm');
+        const chatInput = document.getElementById('chatInput');
+        const chatMessages = document.getElementById('chatMessages');
+
+        const addMessage = (text, sender) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            const paragraph = document.createElement('p');
+            paragraph.textContent = text;
+            messageDiv.appendChild(paragraph);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+
+        const showTypingIndicator = () => {
+            let indicator = chatMessages.querySelector('.typing-indicator');
+            if (!indicator) {
+                indicator = document.createElement('div');
+                indicator.className = 'message ia typing-indicator';
+                indicator.innerHTML = '<p><span></span><span></span><span></span></p>';
+                chatMessages.appendChild(indicator);
+            }
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+
+        const hideTypingIndicator = () => {
+            const indicator = chatMessages.querySelector('.typing-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        };
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userQuestion = chatInput.value.trim();
+            if (!userQuestion) return;
+            addMessage(userQuestion, 'user');
+            chatInput.value = '';
+            showTypingIndicator();
+            try {
+                const response = await fetch('/perguntar-ia', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pergunta: userQuestion })
+                });
+                if (!response.ok) throw new Error(`Erro na API: ${response.statusText}`);
+                const data = await response.json();
+                hideTypingIndicator();
+                addMessage(data.resposta || "Não recebi uma resposta válida.", 'ia');
+            } catch (error) {
+                console.error('Erro ao comunicar com a IA:', error);
+                hideTypingIndicator();
+                addMessage('Desculpe, não consegui me conectar ao assistente.', 'ia error');
+            }
+        });
+    });
+    /*]]>*/
+</script>
+
 </body>
 </html>
