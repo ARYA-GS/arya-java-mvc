@@ -2,31 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cadastro de Usuário</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/cadastro.css}">
 </head>
 <body>
-<h1>Cadastro de Usuário</h1>
+<div class="cadastro-container">
+    <img th:src="@{/imagem/arya-branco.png}" alt="Arya Logo" class="arya-logo">
 
-<form th:action="@{/usuarios/cadastro}" method="post" th:object="${usuario}">
-    <label>Nome:</label>
-    <input type="text" th:field="*{nome}" required /><br/>
+    <h1>Cadastro de Usuário</h1>
 
-    <label>Data de Nascimento:</label>
-    <input type="date" th:field="*{dataNasc}" /><br/>
+    <form th:action="@{/usuarios/cadastro}" method="post" th:object="${usuario}">
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}" required />
 
-    <label>Email:</label>
-    <input type="email" th:field="*{email}" required /><br/>
+        <label>Data de Nascimento:</label>
+        <input type="date" th:field="*{dataNasc}" />
 
-    <label>Senha:</label>
-    <input type="password" th:field="*{senha}" required /><br/>
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" required />
 
-    <button type="submit">Cadastrar</button>
-</form>
+        <label>Senha:</label>
+        <input type="password" th:field="*{senha}" required />
 
-<hr/>
+        <button type="submit">Cadastrar</button>
+    </form>
 
-<p>Esqueceu sua senha? <a th:href="@{/usuarios/trocar-senha}">Trocar senha</a></p>
-
+    <hr/>
+    <p>já tem conta? <a th:href="@{/login}">login</a></p>
+</div>
 </body>
 </html>
 

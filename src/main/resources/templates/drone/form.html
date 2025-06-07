@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro de Drone</title>
+    <link rel="stylesheet" th:href="@{/cadastrodrone.css}">
+</head>
+<body>
+
+<div class="drone-form-container">
+    <h1 th:text="${idDrone != null} ? 'Editar Drone' : 'Cadastrar Drone'"></h1>
+
+    <form th:action="${idDrone != null} ? @{'/drones/atualizar/' + ${idDrone}} : @{/drones}"
+          th:object="${drone}" method="post">
+
+        <label>Hub Operacional:</label>
+        <select th:field="*{idHub}" required>
+            <option value="" disabled selected>Selecione um Hub</option>
+            <option th:each="hub : ${hubs}" th:value="${hub.idHub}" th:text="${hub.nome}"></option>
+        </select>
+
+        <label>Modelo:</label>
+        <input type="text" th:field="*{modelo}" required />
+
+        <label>Alcance (km):</label>
+        <input type="number" th:field="*{alcanceKm}" required />
+
+        <label>Carga (kg):</label>
+        <input type="number" step="0.1" th:field="*{cargaKg}" required />
+
+        <label>Funções (separadas por vírgula):</label>
+        <input type="text" th:name="funcoesString"
+               th:value="${#strings.listJoin(drone.funcoes, ', ')}" />
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+
+    <div class="actions-footer">
+        <a th:href="@{/drones}" class="btn btn-secondary">Voltar</a>
+    </div>
+</div>
+
+</body>
+</html>

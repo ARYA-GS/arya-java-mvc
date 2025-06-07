@@ -1,0 +1,310 @@
+/* General Body Styles */
+:root {
+    --primary-green: #00c292;
+    --dark-bg: #1a1e2e;
+    --panel-bg: #252a3a;
+    --panel-bg-hover: #30364f;
+    --border-color: #4a5072;
+    --text-primary: #e0e0e0;
+    --text-secondary: #c0c0c0;
+    --red-logout: #ff8b8b;
+    --red-logout-hover: #ff6b6b;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-primary);
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* === Dashboard Layout === */
+.dashboard-container {
+    display: flex;
+    height: 100%;
+}
+
+.nav-panel {
+    background-color: var(--panel-bg);
+    width: 300px;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border-color);
+    transition: width 0.3s ease;
+}
+
+.nav-panel-main {
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.main-content-panel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 30px;
+    box-sizing: border-box;
+    min-width: 0;
+    overflow-y: auto;
+}
+
+.map-panel {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+}
+
+.charts-grid-panel {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    min-height: 250px;
+}
+
+.chart-panel {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--panel-bg);
+    padding: 25px;
+    border-radius: 12px;
+    min-height: 0;
+    box-sizing: border-box;
+}
+
+/* === Navigation Panel Styles === */
+.nav-panel .arya-logo {
+    max-width: 100px;
+    margin: 0 auto 20px auto;
+}
+.nav-panel h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+.nav-panel .welcome-text {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    margin-bottom: 30px;
+}
+.nav-menu {
+    list-style-type: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.nav-menu li {
+    background-color: var(--panel-bg-hover);
+    border-radius: 8px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    border: 1px solid transparent;
+}
+.nav-menu li:hover {
+    transform: translateX(5px);
+    border-color: var(--primary-green);
+}
+.nav-menu a {
+    display: block;
+    padding: 15px 20px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+.nav-menu li.logout-item a { color: var(--red-logout); }
+.nav-menu li.logout-item:hover { border-color: var(--red-logout-hover); }
+.nav-menu li.logout-item:hover a { color: var(--red-logout-hover); }
+
+/* === Chat Panel Styles === */
+.chat-ia-panel {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border-color);
+    background-color: #1f2331;
+}
+.chat-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+.chat-header h3 {
+    margin: 0;
+    font-size: 1em;
+    color: var(--primary-green);
+    text-align: center;
+}
+.chat-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    max-height: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.message {
+    max-width: 85%;
+    word-wrap: break-word;
+}
+.message p {
+    margin: 0;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 0.95em;
+}
+.message.user { align-self: flex-end; }
+.message.user p {
+    background-color: var(--primary-green);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+.message.ia { align-self: flex-start; }
+.message.ia p {
+    background-color: var(--panel-bg-hover);
+    color: var(--text-primary);
+    border-bottom-left-radius: 4px;
+}
+.message.ia.error p {
+    background-color: rgba(255, 107, 107, 0.2);
+    color: var(--red-logout);
+}
+.chat-input-area {
+    padding: 10px 15px;
+    border-top: 1px solid var(--border-color);
+}
+.chat-input-area form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.chat-input-area input {
+    flex-grow: 1;
+    background-color: var(--panel-bg-hover);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 8px 15px;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s;
+}
+.chat-input-area input:focus { border-color: var(--primary-green); }
+.chat-input-area button {
+    background: none; border: none;
+    color: var(--text-secondary);
+    cursor: pointer; padding: 5px;
+    transition: color 0.2s;
+}
+.chat-input-area button:hover { color: var(--primary-green); }
+.chat-input-area button svg { width: 20px; height: 20px; }
+
+/* Typing indicator animation */
+.typing-indicator p span {
+    height: 8px; width: 8px;
+    background-color: #999;
+    border-radius: 50%;
+    display: inline-block;
+    animation: dot-flashing 1.4s infinite linear;
+}
+.typing-indicator p span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator p span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dot-flashing { 0%, 100% { opacity: 0.2; } 20% { opacity: 1; } }
+
+/* === Map and Chart Panel Styles === */
+.map-panel h2, .chart-panel h2 {
+    margin-top: 0; margin-bottom: 20px;
+    font-size: 1.5em; color: #fff;
+    flex-shrink: 0;
+}
+
+/* NOVO: Wrapper para o canvas para controlar o tamanho responsivo */
+.chart-canvas-wrapper {
+    position: relative;
+    flex-grow: 1;
+}
+
+#mapaRiscos {
+    width: 100%; height: 100%;
+    border-radius: 12px; background-color: #111;
+}
+
+/* REMOVIDO: A responsividade agora é controlada pelo wrapper e JS */
+/* #graficoOcorrencias, #graficoDrones, #graficoHubs {
+    width: 100% !important; height: 100% !important;
+} */
+
+/* === Leaflet Custom Styles === */
+.custom-popup .leaflet-popup-content-wrapper {
+    background-color: var(--panel-bg); color: var(--text-primary);
+    border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+.custom-popup .leaflet-popup-content { margin: 13px 20px; }
+.custom-popup .leaflet-popup-tip { background-color: var(--panel-bg); border: none; }
+.custom-popup strong { color: var(--primary-green); }
+
+/* Pulsing Risk Marker */
+@keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; transform: scale(1.4); } 100% { opacity: 0.7; } }
+.pulsing-dot { width: 12px; height: 12px; border-radius: 50%; animation: pulse 1.5s infinite; }
+
+/* === Responsive Adjustments === */
+@media (max-width: 1200px) {
+    .nav-panel {
+        width: 260px;
+    }
+}
+
+@media (max-width: 992px) {
+    body {
+        height: auto;
+        overflow: auto;
+    }
+    .dashboard-container {
+        flex-direction: column;
+        height: auto;
+    }
+    .nav-panel {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        flex-direction: row;
+        align-items: stretch;
+    }
+    .chat-ia-panel {
+        display: flex;
+        margin-top: 0;
+        border-top: none;
+        border-left: 1px solid var(--border-color);
+        width: 45%;
+        flex-shrink: 0;
+    }
+    .nav-panel-main {
+        width: 55%;
+        flex-shrink: 0;
+    }
+    .main-content-panel { padding: 20px; }
+    .charts-grid-panel { grid-template-columns: 1fr; }
+    .map-panel { height: 400px; flex: none; }
+    .chart-panel { height: 300px; }
+}
+
+@media (max-width: 768px) {
+    .nav-panel {
+        flex-direction: column;
+    }
+    .nav-panel-main, .chat-ia-panel {
+        width: 100%;
+    }
+    .chat-ia-panel {
+        display: none;
+    }
+}

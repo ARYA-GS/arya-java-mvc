@@ -2,24 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Resetar Senha</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/resetar.css}">
 </head>
 <body>
-<h1>Resetar Senha</h1>
+<div class="resetar-container">
+    <img th:src="@{/imagem/arya-branco.png}" alt="Arya Logo" class="arya-logo">
 
-<form th:action="@{|/recuperar-senha/${token}|}" method="post" th:object="${request}">
-    <label>Nova Senha:</label>
-    <input type="password" th:field="*{novaSenha}" required /><br/>
+    <h1>Resetar Senha</h1>
 
-    <label>Confirmar Senha:</label>
-    <input type="password" th:field="*{confirmarSenha}" required /><br/>
+    <form th:action="@{|/recuperar-senha/${token}|}" method="post" th:object="${request}">
+        <label>Nova Senha:</label>
+        <input type="password" th:field="*{novaSenha}" required />
+        <label>Confirmar Senha:</label>
+        <input type="password" th:field="*{confirmarSenha}" required />
+        <button type="submit">Atualizar Senha</button>
+    </form>
 
-    <button type="submit">Atualizar Senha</button>
-</form>
 
-<div th:if="${erro}" style="color:red;">
-    <p th:text="${erro}"></p>
+    <div th:if="${erro}" class="error-message-container">
+        <p th:text="${erro}"></p>
+    </div>
 </div>
-
 </body>
 </html>

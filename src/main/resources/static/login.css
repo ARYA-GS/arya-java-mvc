@@ -1,0 +1,300 @@
+/* login.css (Conteúdo do seu arquivo CSS principal para a tela de LOGIN) */
+
+/* General Body Styles */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #1a1e2e; /* Fundo escuro ajustado para verdes */
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Main Login Container */
+.login-container {
+    background-color: #252a3a; /* Container escuro ajustado para verdes */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
+
+/* Arya Logo Styles */
+.arya-logo {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 20px;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+
+/* Heading Styles */
+h1 {
+    color: #ffffff;
+    margin-bottom: 25px;
+    font-size: 2.2em;
+    font-weight: 600;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Adicionando color-scheme ao formulário para influenciar os inputs */
+    color-scheme: dark;
+}
+
+/* Label Styles */
+label {
+    font-weight: 500;
+    color: #c0c0c0;
+    text-align: left;
+    margin-bottom: -10px;
+}
+
+/* Input Field Styles */
+input[type="email"],
+input[type="password"] {
+    background-color: #30364f; /* Fundo do input ajustado */
+    color: #ffffff; /* Cor do texto digitado */
+    border: 1px solid #4a5072; /* Borda sutil nos inputs ajustada */
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    caret-color: #50d8af; /* Cor do cursor de texto (caret) */
+    /* Tentativa de influenciar o autocomplete */
+    color-scheme: dark;
+}
+
+/* Estilização para o texto do placeholder (se você usar) */
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: #8a91b4; /* Tom mais claro para placeholder */
+    opacity: 1; /* Garante que a opacidade seja 1 */
+}
+
+
+/* Estilização específica para WebKit/Blink (Chrome, Edge, Opera) para o preenchimento automático */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    /* O box-shadow é uma forma de "enganar" o navegador para sobrescrever o fundo amarelo/branco padrão. */
+    /* A cor de fundo é a interna, a cor de texto é a externa */
+    box-shadow: 0 0 0 100px #30364f inset !important; /* Cor de fundo do input */
+    -webkit-text-fill-color: #ffffff !important; /* Cor do texto preenchido automaticamente */
+    caret-color: #50d8af !important; /* Cor do cursor também aqui */
+    font-size: 1em; /* Garante o mesmo tamanho de fonte */
+    border-radius: 8px; /* Mantém o border-radius */
+    border: 1px solid #4a5072; /* Mantém a borda original */
+    /* Remove a transição padrão do autofill para evitar piscar amarelo */
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #00c292; /* Verde principal para borda de foco */
+    box-shadow: 0 0 0 3px rgba(0, 194, 146, 0.25), 0 0 0 100px #30364f inset !important; /* Mantém o inset do autofill mesmo no foco */
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Button Styles */
+button[type="submit"] {
+    background-color: #00c292; /* Verde principal para o botão */
+    color: #ffffff; /* Texto branco para contraste */
+    border: none;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #00a37e; /* Tom de verde mais escuro para hover */
+    transform: translateY(-2px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Error Message Style */
+.error-message {
+    color: #ff6b6b !important;
+    background-color: rgba(255, 107, 107, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 15px;
+    font-weight: 500;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+/* Horizontal Rule Style */
+hr {
+    border: none;
+    border-top: 1px solid #4a5072;
+    margin: 30px 0;
+}
+
+/* Bottom Links Styles */
+.login-container p {
+    margin-top: 15px;
+    font-size: 0.95em;
+    color: #b0b0b0;
+}
+
+.login-container p a {
+    color: #50d8af;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.login-container p a:hover {
+    color: #6ff0c8;
+    text-decoration: underline;
+}
+
+/* === ESTILOS DA ANIMAÇÃO DOS DRONES === */
+.drone-animation-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.drone {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(180, 190, 220, 0.20);
+    border-radius: 50%;
+    opacity: 0;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 8px rgba(180, 190, 220, 0.15), 0 0 15px rgba(180, 190, 220, 0.1);
+}
+
+.drone::before, .drone::after {
+    content: '';
+    position: absolute;
+    background-color: rgba(150, 160, 200, 0.15);
+}
+
+.drone::before {
+    width: 50px;
+    height: 4px;
+    border-radius: 2px;
+    box-shadow:
+            -22px 0px 0px 3px rgba(170, 180, 210, 0.20),
+            22px 0px 0px 3px rgba(170, 180, 210, 0.20);
+}
+
+.drone::after {
+    width: 4px;
+    height: 50px;
+    border-radius: 2px;
+    box-shadow:
+            0px -22px 0px 3px rgba(170, 180, 210, 0.20),
+            0px 22px 0px 3px rgba(170, 180, 210, 0.20);
+}
+
+.drone-1 {
+    animation-name: fly-across-1;
+    animation-duration: 28s;
+    animation-delay: 0s;
+    left: -90px;
+    top: 15%;
+}
+.drone-1::before { width: 60px; box-shadow: -27px 0px 0px 4px rgba(170, 180, 210, 0.25), 27px 0px 0px 4px rgba(170, 180, 210, 0.25); }
+.drone-1::after { height: 60px; box-shadow: 0px -27px 0px 4px rgba(170, 180, 210, 0.25), 0px 27px 0px 4px rgba(170, 180, 210, 0.25); }
+
+.drone-2 {
+    animation-name: fly-across-2;
+    animation-duration: 38s;
+    animation-delay: 7s;
+    left: -70px;
+    top: 45%;
+    transform: scale(0.85);
+}
+
+.drone-3 {
+    animation-name: fly-across-3;
+    animation-duration: 32s;
+    animation-delay: 12s;
+    left: -80px;
+    top: 75%;
+    transform: scale(0.95);
+}
+
+@keyframes fly-across-1 {
+    0% { left: -10%; opacity: 0; transform: translateY(0px) rotate(-5deg) scale(1.0); }
+    10% { opacity: 0.7; }
+    20% { transform: translateY(-10px) rotate(-3deg) scale(1.0); }
+    80% { transform: translateY(5px) rotate(2deg) scale(1.0); }
+    90% { opacity: 0.7; }
+    100% { left: 110%; opacity: 0; transform: translateY(15px) rotate(5deg) scale(1.0); }
+}
+
+@keyframes fly-across-2 {
+    0% { left: -10%; opacity: 0; transform: translateY(0px) rotate(3deg) scale(0.85); }
+    15% { opacity: 0.6; }
+    30% { transform: translateY(15px) rotate(5deg) scale(0.85); }
+    70% { transform: translateY(-5px) rotate(-2deg) scale(0.85); }
+    85% { opacity: 0.6; }
+    100% { left: 110%; opacity: 0; transform: translateY(-20px) rotate(-7deg) scale(0.85); }
+}
+
+@keyframes fly-across-3 {
+    0% { left: -10%; opacity: 0; transform: translateY(0px) rotate(-2deg) scale(0.95); }
+    10% { opacity: 0.65; }
+    40% { transform: translateY(-12px) rotate(1deg) scale(0.95); }
+    60% { transform: translateY(8px) rotate(-3deg) scale(0.95); }
+    90% { opacity: 0.65; }
+    100% { left: 110%; opacity: 0; transform: translateY(5px) rotate(3deg) scale(0.95); }
+}
+
+@media (max-width: 768px) {
+    .drone-1 { animation-duration: 33s; }
+    .drone-2 { animation-duration: 43s; }
+    .drone-3 { animation-duration: 37s; }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 25px 20px;
+    }
+    .arya-logo { max-width: 100px; margin-bottom: 20px; }
+    h1 { font-size: 1.8em; }
+    input[type="email"], input[type="password"], button[type="submit"] { font-size: 0.95em; padding: 10px 12px; }
+    .drone-1::before { width: 40px; box-shadow: -18px 0px 0px 3px rgba(170, 180, 210, 0.20), 18px 0px 0px 3px rgba(170, 180, 210, 0.20); }
+    .drone-1::after { height: 40px; box-shadow: 0px -18px 0px 3px rgba(170, 180, 210, 0.20), 0px 18px 0px 3px rgba(170, 180, 210, 0.20); }
+    .drone-2 { display: none; }
+    .drone-3 { transform: scale(0.75); }
+    .drone-3::before { width: 35px; box-shadow: -16px 0px 0px 2px rgba(170, 180, 210, 0.15), 16px 0px 0px 2px rgba(170, 180, 210, 0.15); }
+    .drone-3::after { height: 35px; box-shadow: 0px -16px 0px 2px rgba(170, 180, 210, 0.15), 0px 16px 0px 2px rgba(170, 180, 210, 0.15); }
+}

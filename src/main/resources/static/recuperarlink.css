@@ -1,0 +1,107 @@
+/* recuperarlink.css */
+
+/* General Body Styles */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #1a1e2e; /* Fundo escuro padrão */
+    color: #e0e0e0; /* Texto claro */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center; /* Centralizar texto no body, útil para conteúdo simples */
+}
+
+/* Main Link Container */
+.link-container { /* Você vai querer envolver seu conteúdo em um div com esta classe */
+    background-color: #252a3a; /* Cor do container */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px; /* Pode ser um pouco mais largo se o texto for maior */
+    position: relative;
+    z-index: 1;
+}
+
+/* Arya Logo Styles (Opcional, se quiser adicionar o logo) */
+.arya-logo {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 25px; /* Mais espaço se o logo estiver acima do título */
+    image-rendering: crisp-edges;
+}
+
+/* Heading Styles */
+h1 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 2.0em;
+    font-weight: 600;
+}
+
+/* Paragraph Styles */
+p {
+    color: #c0c0c0; /* Cor de texto um pouco mais suave para parágrafos */
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Link Style (estilizado para parecer um botão) */
+a {
+    display: inline-block; /* Permite padding e outros estilos de bloco */
+    background-color: #00c292; /* Verde principal da Arya */
+    color: #ffffff; /* Texto branco para contraste */
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none; /* Remover sublinhado padrão */
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 2px solid transparent; /* Para um efeito de borda no foco, se desejado */
+}
+
+a:hover {
+    background-color: #00a37e; /* Tom de verde mais escuro para hover */
+    transform: translateY(-2px); /* Leve elevação */
+}
+
+a:active {
+    transform: translateY(0); /* Efeito de clique */
+}
+
+a:focus {
+    outline: none; /* Remover outline padrão */
+    border-color: #50d8af; /* Borda de destaque verde claro no foco */
+    box-shadow: 0 0 0 3px rgba(0, 194, 146, 0.3); /* Brilho suave no foco */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .link-container {
+        padding: 25px 20px;
+    }
+
+    .arya-logo {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    a {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+}

@@ -39,10 +39,6 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {

@@ -1,6 +1,5 @@
 package com.arya.api.mvc.client;
 
-import com.arya.api.mvc.config.FeignConfig;
 import com.arya.api.mvc.dto.response.SugestaoDroneResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

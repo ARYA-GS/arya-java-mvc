@@ -2,11 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Link para Recuperação</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/recuperarlink.css}">
 </head>
 <body>
-<h1>Recuperar Senha</h1>
-<p>Clique no link abaixo para redefinir sua senha:</p>
-<a th:href="@{${link}}">Redefinir Senha</a>
+<div class="link-container">
+    <img th:src="@{/imagem/arya-branco.png}" alt="Arya Logo" class="arya-logo">
+
+    <h1>Recuperar Senha</h1>
+    <p>Clique no link abaixo para redefinir sua senha:</p>
+    <a th:href="@{${link}}">Redefinir Senha</a>
+</div>
 </body>
+</html>
 </html>
