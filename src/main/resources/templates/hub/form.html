@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Novo Hub</title>
+    <link rel="stylesheet" th:href="@{/cadastrohub.css}">
+</head>
+<body>
+
+<div class="hub-form-container">
+    <h1>Novo Hub Operacional</h1>
+
+    <form th:action="@{/hubs}" th:object="${hub}" method="post">
+        <label>Nome do hub:</label>
+        <input type="text" th:field="*{nome}" required />
+
+        <label>Status:</label>
+        <input type="text" th:field="*{status}" />
+
+        <h3>Endereço</h3>
+
+        <label>Cidade:</label>
+        <input type="text" th:field="*{endereco.cidade}" required />
+
+        <label>Estado:</label>
+        <input type="text" th:field="*{endereco.estado}" required />
+
+        <label>País:</label>
+        <input type="text" th:field="*{endereco.pais}" required />
+
+        <label>Bairro:</label>
+        <input type="text" th:field="*{endereco.bairro}" />
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+
+    <div class="actions-footer">
+        <a th:href="@{/hubs}" class="btn btn-secondary">Voltar</a>
+    </div>
+</div>
+
+</body>
+</html>

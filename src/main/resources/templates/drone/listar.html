@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Drones</title>
+    <link rel="stylesheet" th:href="@{/listadrone.css}">
+</head>
+<body>
+<div class="drones-container">
+    <h1>Lista de Drones</h1>
+
+    <div class="actions-header">
+        <a th:href="@{/drones/novo}" class="btn btn-primary">Cadastrar Novo Drone</a>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th>Modelo</th>
+                <th>Alcance (km)</th>
+                <th>Carga (kg)</th>
+                <th>Funções</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(drones)}">
+                <td colspan="5" style="text-align: center;">Nenhum drone encontrado.</td>
+            </tr>
+            <tr th:each="drone : ${drones}">
+                <td th:text="${drone.modelo}">Modelo</td>
+                <td th:text="${drone.alcanceKm}">Alcance</td>
+                <td th:text="${drone.cargaKg}">Carga</td>
+                <td th:text="${#strings.arrayJoin(drone.funcoes.toArray(), ', ')}">Funções</td>
+                <td>
+                    <a th:href="@{/drones/editar/{id}(id=${drone.idDrone})}">Editar</a> |
+                    <a th:href="@{/drones/deletar/{id}(id=${drone.idDrone})}" class="delete-link">Deletar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="actions-footer">
+        <!-- Adicionadas classes 'btn' e 'btn-secondary' -->
+        <a th:href="@{/home}" class="btn btn-secondary">Voltar para Home</a>
+    </div>
+</div>
+</body>
+</html>
