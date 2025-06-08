@@ -84,7 +84,7 @@ api:
 ### Execução
 
 ```bash
-git clone <URL_DO_SEU_REPOSITORIO>
+git clone <https://github.com/ARYA-GS/arya-java-mvc.git>
 cd arya-java-mvc
 ./mvnw spring-boot:run
 ```
