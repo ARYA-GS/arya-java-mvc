@@ -1,5 +1,16 @@
 # Arya MVC - Painel de Gestão Operacional
 
+# Aluno	RM
+
+#### Keven Ike Pereira da Silva	553215
+
+#### Vitor Cruz dos Santos  553621
+
+#### José Ribeiro dos Santos Neto 553844
+
+
+Link do Video [video](https://youtu.be/8YhITEJctlA)
+
 ## Visão Geral
 O Arya MVC é uma aplicação web completa que serve como a interface de usuário para a plataforma de gerenciamento de operações Arya. Construído com Spring Boot e o padrão MVC, este painel fornece uma experiência rica e interativa para operadores, permitindo o gerenciamento de recursos, a visualização de dados em tempo real e a interação com serviços de inteligência artificial.
 
