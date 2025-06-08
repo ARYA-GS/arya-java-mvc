@@ -60,6 +60,10 @@ A aplicação segue uma arquitetura MVC clara e desacoplada.
 
 ## Como Executar o Projeto
 
+Para executar este projeto corretamente, é necessário rodá-lo em conjunto com a aplicação arya-java.
+
+🔗 Link do GitHub: https://github.com/ARYA-GS/arya-java
+
 ### Pré-requisitos
 - Java Development Kit (JDK) 21 ou superior.
 - Apache Maven 3.9 ou superior.
