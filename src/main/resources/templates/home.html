@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home - Arya Dashboard</title>
-    <!-- CSS for the home page -->
     <link rel="stylesheet" th:href="@{/home.css}">
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- Chart.js JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 </head>
 <body>
 
@@ -22,7 +22,6 @@
             <p class="welcome-text">Bem-vindo à Central de Operações Arya.</p>
 
             <ul class="nav-menu">
-                <li><a th:href="@{/usuarios/trocar-senha}">Trocar Senha</a></li>
                 <li><a th:href="@{/hubs}">Gerenciar Hubs</a></li>
                 <li><a th:href="@{/drones}">Gerenciar Drones</a></li>
                 <li class="logout-item"><a th:href="@{/logout}">Sair</a></li>
